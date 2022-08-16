@@ -1,5 +1,7 @@
 ## 1.1: Introducing RPi OS, or bare-metal "Hello, World!"
 
+Jackson: make的ref，皆來自GNU make document
+
 We are going to start our journey in OS development by writing a small, bare-metal "Hello, World" application. I assume that  you have gone through the [Prerequisites](../Prerequisites.md) and have everything ready. If not, now is the time to do this.
 
 Before we move forward, I want to establish a simple naming convention. From the README file you can see that the whole tutorial is divided into lessons. Each lesson consists of individual files that I call "chapters" (right now, you are reading lesson 1, chapter 1.1). A chapter is further divided into "sections" with headings. This naming convention allows me to make references to different parts of the material.
@@ -100,13 +102,18 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
 The next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `build/foo_c.o` and `build/foo_s.o`, respectively. `$<` and `$@` are substituted at runtime with the input and output filenames (`foo.c` and `foo_c.o`). Before compiling C files, we also create a `build` directory in case it doesn't exist yet.
 
 ```
-C_FILES = $(wildcard $(SRC_DIR)/*.c)
-ASM_FILES = $(wildcard $(SRC_DIR)/*.S)
-OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)
-OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
+C_FILES = $(wildcard $(SRC_DIR)/*.c)                          # ch4.3.1 ~ ch4.3.3 (wildcard在p26有e.g.) 
+ASM_FILES = $(wildcard $(SRC_DIR)/*.S)                        
 ```
 
-ref: make document ch4.3  
+Jackson: 如果變數宣告時包含wildcard charactor \*，則必須用function $(wildcard )，避免報錯(錯誤詳見ch4.3.2)
+
+```
+OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)      # ch6.3.1 (var:a=b)
+OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
+```
+Jackson: var:=a=b，var中的a替換為b
+
 Here we are building an array of all object files (`OBJ_FILES`) created from the concatenation of both C and assembler source files (see [Substitution References](https://www.gnu.org/software/make/manual/html_node/Substitution-Refs.html)).
 
 ```
