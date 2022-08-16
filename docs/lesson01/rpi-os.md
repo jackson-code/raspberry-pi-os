@@ -106,7 +106,7 @@ OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)
 OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 ```
 
-ref: make document ch4.3
+ref: make document ch4.3  
 Here we are building an array of all object files (`OBJ_FILES`) created from the concatenation of both C and assembler source files (see [Substitution References](https://www.gnu.org/software/make/manual/html_node/Substitution-Refs.html)).
 
 ```
