@@ -112,7 +112,7 @@ Jackson: 如果變數宣告時包含wildcard charactor \*，則必須用function
 OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)      # ch6.3.1 (var:a=b)
 OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 ```
-Jackson: var:=a=b，var中的a替換為b
+Jackson: var:a=b，var中的a替換為b
 
 Here we are building an array of all object files (`OBJ_FILES`) created from the concatenation of both C and assembler source files (see [Substitution References](https://www.gnu.org/software/make/manual/html_node/Substitution-Refs.html)).
 
