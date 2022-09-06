@@ -12,6 +12,7 @@ An operating system itself usually works at EL1. While running at this exception
 
 We are not going to use exceptions levels 2 and 3 a lot, but I just want to briefly describe them so you can get an idea why they are needed. 
 
+Jackson: hypervisor為管理虛擬機的軟體，像是vmware，詳見wiki
 EL2 is used in a scenario when we are using a hypervisor. In this case host operating system runs at EL2 and guest operating systems can only use EL 1. This allows host OS to isolate guest OSes in a similar way how OS isolates user processes.
 
 EL3 is used for transitions from ARM "Secure World" to "Insecure world". This abstraction exist to provide full hardware isolation between the software running in two different "worlds". Application from an "Insecure world" can in no way access or modify information (both instruction and data) that belongs to "Secure world", and this restriction is enforced at the hardware level. 
